@@ -2,21 +2,21 @@ const mongoose = require('mongoose');
 import express, { Request, Response } from "express";
 var router = express.Router();
 
-const GameRecords = require("../models/GameRecords");
+const Question = require("../models/Question");
 
 
 router.get("/", (req: Request, res: Response) => {
     res.send("Hello game!");
 });
 
-// display all game records
+// display all questions
 router.get("/list", (req: Request, res: Response) => {
-    GameRecords.find()
+    Question.find()
     .exec()
     .then((result: any) => {
       res.status(201).json({
-        message: "List all game records",
-        gameList: result
+        message: "List all questions",
+        questionList: result
       });
     })
     .catch((err: Error) => {
@@ -27,20 +27,21 @@ router.get("/list", (req: Request, res: Response) => {
     });
 });
 
-// CREATE new game record
+// CREATE new question
 router.post("/create", (req: Request, res: Response) => {
-    const game = new GameRecords({
+    const question = new Question({
       _id: new mongoose.Types.ObjectId(),
-      username: req.body.username,
-      correct_answers: req.body.correct_answers
+      question: req.body.question,
+      options: req.body.options,
+      answer: req.body.answer
     });
-    game
+    question
       .save()
       .then((result: any) => {
         console.log(result);
         res.status(201).json({
             message: "Doccument created!",
-            gameCreated: result
+            questionCreated: result
         });
       })
       .catch((err: Error) => {
@@ -53,15 +54,15 @@ router.post("/create", (req: Request, res: Response) => {
 
 
   // READ game record with _id
-  router.get('/:gameId', (req: Request, res: Response) => {
-    const id = req.params.gameId;
-    GameRecords.findById(id)
+  router.get('/:questionId', (req: Request, res: Response) => {
+    const id = req.params.questionId;
+    Question.findById(id)
       .exec()
       .then((result: any) => {
         if (result) {
           res.status(200).json({
             message: "Doccument fetch!",
-            game: result
+            question: result
         });
         }
       })
@@ -73,17 +74,17 @@ router.post("/create", (req: Request, res: Response) => {
   });
     
 
-  // UPDATE game record
-  router.patch("/:gameId", (req: Request, res: Response) => {
-    const id = req.params.gameId;
+  // UPDATE question
+  router.patch("/:questionId", (req: Request, res: Response) => {
+    const id = req.params.questionId;
   
     console.log(req.body)
-    GameRecords.findOneAndUpdate({ _id: id }, req.body)
+    Question.findOneAndUpdate({ _id: id }, req.body)
       .exec()
       .then((result: any) => {
         res.status(200).json({
             message: "Doccument updated!",
-            gameUpdated: result
+            questionUpdated: result
         });
       })
       .catch((err: Error) => {
@@ -93,15 +94,15 @@ router.post("/create", (req: Request, res: Response) => {
       });
   });
 
-  //DELETE game record
-  router.delete("/:gameId", (req: Request, res: Response) => {
-    const id = req.params.gameId;
-    GameRecords.findOneAndDelete({ _id: id })
+  //DELETE question
+  router.delete("/:questionId", (req: Request, res: Response) => {
+    const id = req.params.questionId;
+    Question.findOneAndDelete({ _id: id })
       .exec()
       .then((result: any) => {
         res.status(200).json({
             message: "Doccument deleted!",
-            gameDeleted: result
+            questionDeleted: result
         });
       })
       .catch((err: Error) => {

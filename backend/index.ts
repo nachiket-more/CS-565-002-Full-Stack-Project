@@ -7,17 +7,28 @@ const gameRecordRoute = require('./src/routes/gameRecord');
 require('dotenv').config({ path: './.env' })
 
 
-const client = mongoose.connect(
-    "mongodb+srv://user-nachiket:" +
-       process.env.MONGODB_PASS +
-       "@cluster0.gclgp9o.mongodb.net/?retryWrites=true&w=majority"
-);
+// const client = mongoose.connect(
+//     "mongodb+srv://user-nachiket:" +
+//        process.env.MONGODB_PASS +
+//        "@cluster0.gclgp9o.mongodb.net/?retryWrites=true&w=majority"
+// );
 
-
+const client = mongoose
+  .connect("mongodb+srv://user-nachiket:" +
+  process.env.MONGODB_PASS +
+  "@cluster0.gclgp9o.mongodb.net/?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: 'triviagame_app',
+  })
+  .then(() => {
+    console.log('Connected to the Database.');
+  })
+  .catch((err: any) => console.error(err));
 
 app.use(bodyParser.json())
 
-app.use('/game', gameRecordRoute);
+app.use('/question', gameRecordRoute);
 
 
 // start the Express server

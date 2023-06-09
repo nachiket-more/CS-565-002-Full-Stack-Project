@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  # frontend: 
+  #   build: ./frontend
+  #   ports: 
+  #     - "3000:3000"
+  #   stdin_open: true
+  #   tty: true
+  
+  frontend:
+    container_name: react-frontend
+    build: ./frontend/
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_DOMAIN = "dev-7mpty06oczftshr2.us.auth0.com"
+      - REACT_APP_CLIENT_ID = "yAfTGPuAVz3jPLyPislzQJKeSRVwo7hU"
+      - PORT = 3000
+    networks:
+      - mern-network
+  
+  backend:
+    container_name: express-backend
+    build: ./backend/
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - database
+    environment:
+      - MONGODB_PASS = "Jv75Nrir7d7yT7lG"
+      - PORT = 3001
+    networks:
+      - mern-network
+  
+  database:
+    container_name: mongodb-database
+    image: mongo
+    volumes:
+      - mongodb_data_container:/data/db
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGODB_PASS = "Jv75Nrir7d7yT7lG"
+      - PORT = 3001
+    networks:
+      - mern-network
+
+networks:
+  mern-network:
+    driver: bridge

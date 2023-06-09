@@ -99,5 +99,5 @@ app.use('/question', gameRecordRoute);
 
 // start the Express server
 app.listen(process.env.PORT, () => {
-    console.log(`\nserver started at http://backend:`+process.env.PORT+'\n');
+    console.log(`server started at http://localhost:`+process.env.PORT);
 });

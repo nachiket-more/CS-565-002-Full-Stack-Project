@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 var bodyParser = require('body-parser')
-var Questions = require('./src/models/Question')
+var 
 var cors = require('cors')
 
 const app = express();
@@ -30,7 +30,7 @@ const client = mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('\nConnected to the Database.\n');
+    console.log('Connected to the Database.');
   })
   .catch((err: any) => console.error(err));
 
@@ -83,15 +83,6 @@ const seedQuestions = [
   }
 ]
 
-const seedDB = async () => {
-  await Questions.deleteMany({});
-  await Questions.insertMany(seedQuestions);
-}
-
-seedDB().then( ()=>{
-  console.log('q\nuestion seeded into triviagame_app\n')
-} )
-
 app.use(bodyParser.json())
 
 app.use('/question', gameRecordRoute);
@@ -99,5 +90,5 @@ app.use('/question', gameRecordRoute);
 
 // start the Express server
 app.listen(process.env.PORT, () => {
-    console.log(`\nserver started at http://backend:`+process.env.PORT+'\n');
+    console.log(`server started at http://localhost:`+process.env.PORT);
 });

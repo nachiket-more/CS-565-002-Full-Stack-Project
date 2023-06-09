@@ -1,0 +1,27 @@
+# FROM node:18-alpine
+
+# WORKDIR /app
+
+# COPY package.json .
+
+# RUN npm install --verbose
+
+# COPY . .
+
+# EXPOSE 3000
+
+# COPY ./ /app/
+# RUN npm build
+
+
+FROM node:18 as build-stage
+
+# RUN npm install -g pnpm
+
+WORKDIR /app
+# COPY ./nginx.conf /nginx.conf
+COPY package*.json /app/
+RUN npm install
+
+COPY ./ /app/
+RUN npm run build

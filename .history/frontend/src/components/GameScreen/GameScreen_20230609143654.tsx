@@ -37,7 +37,7 @@ function QuizComponent() {
   const [finalScore, setFinalScore] = React.useState(0);
 
   React.useEffect(() => {
-    fetch("/question/list")
+    fetch("http://localhost:3001/question/list")
       .then((response) => response.json())
       .then((data) => {
         setQuizQuestionsList(data.questionList);
@@ -48,7 +48,7 @@ function QuizComponent() {
   }, []);
 
   const postScore = async (score: number) => {
-    if (user !== undefined) {
+    if (user != undefined) {
       await fetch("http://127.0.0.1:8000/", {
         method: "post",
         headers: { "Content-Type": "application/json" },

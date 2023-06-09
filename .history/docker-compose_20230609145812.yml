@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  # frontend: 
+  #   build: ./frontend
+  #   ports: 
+  #     - "3000:3000"
+  #   stdin_open: true
+  #   tty: true
+  
+  frontend:
+    container_name: react-frontend
+    build: ./frontend/
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_DOMAIN = "dev-7mpty06oczftshr2.us.auth0.com"
+      - REACT_APP_CLIENT_ID = "yAfTGPuAVz3jPLyPislzQJKeSRVwo7hU"
+      - PORT = 3000
+
+  backend:
+    container_name: express-backend
+    build: ./backend/
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      - REACT_APP_DOMAIN = "dev-7mpty06oczftshr2.us.auth0.com"
+      - REACT_APP_CLIENT_ID = "yAfTGPuAVz3jPLyPislzQJKeSRVwo7hU"
+      - PORT = 3000

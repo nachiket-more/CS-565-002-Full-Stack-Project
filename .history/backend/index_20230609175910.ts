@@ -30,7 +30,7 @@ const client = mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('\nConnected to the Database.\n');
+    console.log('Connected to the Database.');
   })
   .catch((err: any) => console.error(err));
 
@@ -88,10 +88,6 @@ const seedDB = async () => {
   await Questions.insertMany(seedQuestions);
 }
 
-seedDB().then( ()=>{
-  console.log('q\nuestion seeded into triviagame_app\n')
-} )
-
 app.use(bodyParser.json())
 
 app.use('/question', gameRecordRoute);
@@ -99,5 +95,5 @@ app.use('/question', gameRecordRoute);
 
 // start the Express server
 app.listen(process.env.PORT, () => {
-    console.log(`\nserver started at http://backend:`+process.env.PORT+'\n');
+    console.log(`server started at http://localhost:`+process.env.PORT);
 });

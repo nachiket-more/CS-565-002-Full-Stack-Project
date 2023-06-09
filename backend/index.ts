@@ -1,11 +1,14 @@
 import express, { Request, Response } from "express";
 var bodyParser = require('body-parser')
+var cors = require('cors')
 
 const app = express();
 const mongoose = require('mongoose');
 const gameRecordRoute = require('./src/routes/gameRecord');
 require('dotenv').config({ path: './.env' })
 
+app.use(cors())
+app.options('*', cors()) 
 
 // const client = mongoose.connect(
 //     "mongodb+srv://user-nachiket:" +

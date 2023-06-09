@@ -22,19 +22,35 @@ async def post_record(record: Leaderboard):
     return {"status": "ok", "data": record}
 
 #UPDATE record
-@leaderboard_app_router.put("/{id}")
-async def update_record(id: str, record: Leaderboard):
-    collection_name.find_one_and_update({"_id": ObjectId({id})}, {
-        "$set": dict(record)
-    })
-    updated_record = collection_name.find({"_id": ObjectId(id)})
-    return {"status": "ok", "data": update_record}
+# @leaderboard_app_router.put("/{id}")
+# async def update_record(id: str, record: Leaderboard):
+#     collection_name.find_one_and_update({"_id": ObjectId({id})}, {
+#         "$set": dict(record)
+#     })
+#     updated_record = collection_name.find({"_id": ObjectId(id)})
+#     return {"status": "ok", "data": updated_record}
 
-#DELETE record
+@leaderboard_app_router.put('/{id}')
+async def update_record(id:str, record: Leaderboard):
+    collection_name.find_one_and_update({"_id":ObjectId(id)},{
+        "$set":dict(record)
+    })
+    updated_record = record_serializer(collection_name.find_one({"_id": ObjectId(id)}))
+    return {"status": "ok", "data": updated_record}
+
+
+# DELETE record
+# @leaderboard_app_router.delete("/{id}")
+# async def delete_record(id: str):
+#     deleted_record = collection_name.find_one({"_id": ObjectId(id)})    
+#     collection_name.find_one_and_delete({"_id": ObjectId({id})})
+#     return {"status": "ok", "data": deleted_record}
+
+
 @leaderboard_app_router.delete("/{id}")
-async def update_record(id: str):
-    collection_name.find_one_and_delete({"_id": ObjectId({id})})
-    return {"status": "ok", "data": []}
+async def delete_record(id: str, record: Leaderboard):
+    deleted_record =  record_serializer(collection_name.find_one_and_delete({"_id":ObjectId(id)}))
+    return {"status": "ok", "data": deleted_record}
 
 
 

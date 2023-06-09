@@ -1,5 +1,4 @@
-
-.home-bg{
+.leaderboard-bg{
     color: #EDEEEE;
     padding: 20px;
     height: fit-content;
@@ -10,10 +9,7 @@
     transform: translate(-50%, -50%);
     text-align: center;
 }
-.home-heading {
+.leaderboard-heading {
     font-weight: 600;
-}
-#start-game{
-    padding: 7px 50px !important;
-    margin: 20px 0;
+    margin: 30px 0;
 }

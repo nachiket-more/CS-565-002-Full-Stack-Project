@@ -40,8 +40,10 @@ const Navbar = (props: ContainerProps) => {
                     
                                     <Dropdown.Menu>
                                         <Dropdown.Item>{user.name}</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Loug Out</Dropdown.Item>
+                                        <Dropdown.Item href="/leaderboard">Leaderboard</Dropdown.Item>
+                                        <Dropdown.Item id="dropdown-logout" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Loug Out</Dropdown.Item>
                                     </Dropdown.Menu>
+                                    
                                 </Dropdown>
                             )
                         }

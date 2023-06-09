@@ -91,3 +91,27 @@ body {
 #dropdown-basic{
   width: 100% !important;
 }
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #aaaaaa !important;
+  vertical-align: top;
+  border-color: transparent !important;
+}
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+  --bs-table-accent-bg: #1a202c !important;
+  color: #aaaaaa !important;
+}
+
+.dropdown-menu {
+  margin-top: 10px !important;
+  background-color: #1a202c !important;
+  padding: 0 !important;
+}
+.dropdown-item{
+  color: #fff !important;
+  margin: 8px !important;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+  background-color: #2d3748 !important;
+}

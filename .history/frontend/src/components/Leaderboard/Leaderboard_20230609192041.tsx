@@ -20,7 +20,7 @@ function Leaderboard() {
   const [scores, setScores] = useState<Score[]>([]);
 
   useEffect(() => {
-    fetch("http://0.0.0.0:8000/")
+    fetch("http://microservice:8000/")
       .then((response) => response.json())
       .then((data) => {
         let sortedScores = data.data.sort(function(a:any,b:any) {

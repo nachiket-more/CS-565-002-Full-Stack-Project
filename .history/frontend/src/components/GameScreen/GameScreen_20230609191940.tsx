@@ -49,7 +49,7 @@ function QuizComponent() {
 
   const postScore = async (score: number) => {
     if (user !== undefined) {
-      await fetch("http://0.0.0.0:8000/", {
+      await fetch("http://microservice:8000/", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

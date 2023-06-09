@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+  # frontend:
+  #   container_name: react-frontend
+  #   build: ./frontend/
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - backend
+  #   environment:
+  #     - REACT_APP_DOMAIN = "dev-7mpty06oczftshr2.us.auth0.com"
+  #     - REACT_APP_CLIENT_ID = "yAfTGPuAVz3jPLyPislzQJKeSRVwo7hU"
+  #     - PORT = 3000
+  #   networks:
+  #     - mern-network
+  
+  # backend:
+  #   container_name: express-backend
+  #   build: ./backend/
+  #   restart: always
+  #   ports:
+  #     - "3001:3001"
+  #   depends_on:
+  #     - database
+  #   environment:
+  #     - MONGODB_PASS = "Jv75Nrir7d7yT7lG"
+  #     - PORT = 3001
+  #   networks:
+  #     - mern-network
+  
+  # database:
+  #   container_name: mongodb-database
+  #   image: mongo
+  #   volumes:
+  #     - /home/d/triviagame-mongodb-backup:/data/db
+  #   restart: always
+  #   ports:
+  #     - "27017:27017"
+  #   environment:
+  #     - MONGODB_PASS = "Jv75Nrir7d7yT7lG"
+  #     - PORT = 3001
+  #   networks:
+  #     - mern-network
+  
+  microservice:
+    container_name: leaderboard-fastapi
+    build: ./leaderboard-fastapi/
+    restart: always
+    command: uvicorn app.main:app --reload
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+
+volumes:
+  triviagame-mongodb-backup:
+
+networks:
+  mern-network:
+    driver: bridge

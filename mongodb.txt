@@ -1,6 +1,0 @@
-mongodb 
-username
-user-nachiket
-
-password
-Jv75Nrir7d7yT7lG

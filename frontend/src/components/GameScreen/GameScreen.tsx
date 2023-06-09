@@ -15,64 +15,74 @@ function QuizComponent() {
   const navigate = useNavigate();
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [quizQuestionsList, setQuizQuestionsList] = useState([{
+    question:
+      "question",
+    options: {
+      1: "option1",
+      2: "option2",
+      3: "option3",
+    },
+    answer: 1,
+  }])
 
-  const quizQuestionsList = [
-    {
-      question:
-        "What programming languages are commonly used in full-stack development??",
-      options: {
-        1: "Javascript",
-        2: "Python",
-        3: "Ruby",
-      },
-      answer: 1,
-    },
-    {
-      question:
-        "2What programming languages are commonly used in full-stack development??",
-      options: {
-        1: "2Javascript",
-        2: "2Python",
-        3: "2Ruby",
-      },
-      answer: 1,
-    },
-    {
-      question:
-        "3What programming languages are commonly used in full-stack development??",
-      options: {
-        1: "3Javascript",
-        2: "3Python",
-        3: "3Ruby",
-      },
-      answer: 1,
-    },
-  ];
+  const currentQuestion = quizQuestionsList[currentQuestionIndex];
+
+  const [showLoading, setShowLoading] = React.useState(false);
+  const [showGameScreen, setShowGameScreen] = React.useState(true);
+  const [showEndScreen, setShowEndScreen] = React.useState(false);
+  const [selected, setSelected] = useState<number[]>([]);
+    const [finalScore, setFinalScore] = React.useState(0);
+
+
+
+  React.useEffect(() => {
+    fetch('http://localhost:3001/question/list')
+       .then((response) => response.json())
+       .then((data) => {
+          setQuizQuestionsList(data.questionList);
+       })
+       .catch((err) => {
+          console.log(err.message);
+       });
+ }, []);
+
+
 
   const calculateScore = () => {
     setShowLoading(false)
-    console.log("Your score is: ",)
+    setShowEndScreen(true)
+    const matchingCount = selected.reduce((count, value, index) => {
+        const { answer } = quizQuestionsList[index];
+        if (Number(value) === answer) {
+          return count + 1;
+        }
+        return count;
+      }, 0);
+      
+      setFinalScore(matchingCount);
   }
 
+
   const handleNextQuestion = (event:any) => {
-    console.log("selected option: ",event.target.value )
+    setSelected((oldArray) => [...oldArray, event.target.value]);
     if (currentQuestionIndex == quizQuestionsList.length-1){
         setShowLoading(true)
         setShowGameScreen(false)
-        setTimeout(() => {
-            calculateScore()
-        }, 3000);
     }
     else{
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     }
   };
 
-  const currentQuestion = quizQuestionsList[currentQuestionIndex];
+  React.useEffect( () => {
+    if(selected.length==5){
+        setTimeout(() => {
+            calculateScore()
+        }, 1500);
+    }
+  },[selected])
 
-  const [showLoading, setShowLoading] = React.useState(false);
-  const [showGameScreen, setShowGameScreen] = React.useState(false); //true
-  const [showEndScreen, setShowEndScreen] = React.useState(true);
 
   const handleOpenLeaderboard = () => {
     navigate('/game');
@@ -129,7 +139,7 @@ function QuizComponent() {
                 
             <div className="game-finish-container">
                     <h2 className='heading'>Good Job!</h2>
-                    <h4 className='sub-heading'>you got 5 out of 5 correct</h4>
+                    <h4 className='sub-heading'>you got {finalScore} out of 5 correct</h4>
                     <div>
                         <Button variant="primary" className="mt-4" id="open-leaderboard" onClick={handleOpenLeaderboard}>LEADERBOARD</Button>
                     </div>

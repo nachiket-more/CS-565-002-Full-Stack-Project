@@ -1,0 +1,43 @@
+.navbar-container{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-end;
+}
+#user-details-container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#login-button, #signin-button{
+    margin: 20px 20px 20px 0;
+}
+#login-button:hover{
+    color: #65D1EF !important;
+    border-color: transparent !important;
+}
+#user-details{
+    height: auto;
+    width: fit-content;
+    display: flex;
+    margin-right: 20px;
+    margin: 20px 20px 20px 0;
+}
+#user-details img{
+    width: 50px;
+    height: auto;
+    margin: auto;
+    border-radius: 50%;
+}
+
+#user-details h6{
+    margin-left: 10px;
+}
+#dropdown-basic{
+    padding: 0 !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+.dropdown-toggle::after {
+    content: none !important
+}

@@ -1,0 +1,71 @@
+.game-bg{
+    color: #EDEEEE;
+    padding: 20px;
+    height: fit-content;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+}
+.text{
+    font-weight: 400 !important;
+}
+.game-heading {
+    font-weight: 700;
+}
+.game-card{
+    background-color: #1a202c !important;
+    border: 2px solid #1a202c;
+    
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.card-body{
+    padding: 0;
+}
+.card-text{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.spinner-container{
+    width: 100%;
+    height: fit-content;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: white;
+}
+
+#option-btn{
+    width: 80% !important;
+}
+
+
+.game-finish-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: fit-content;
+    width: fit-content;
+}
+
+.game-finish-container .heading{
+    color: #fff;
+}
+
+.game-finish-container .sub-heading{
+    color: #727272;
+}
+
+.game-finish-container #open-leaderboard{
+    
+}

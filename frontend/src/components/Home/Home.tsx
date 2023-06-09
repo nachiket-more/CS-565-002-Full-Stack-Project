@@ -3,6 +3,7 @@ import { Button, Form, Container, Row, Col, Dropdown } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 // import FadeIn from 'react-fade-in';
 import { useAuth0 } from "@auth0/auth0-react";
+import Navbar from "../Navbar/Navbar"
 
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,87 +19,36 @@ function Home() {
 
 
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // const handleSelectRoom = (event) => {
   //   console.log("selected room : ", event.target.innerText);
   //   setRoom(event.target.innerText);
   // };
-  const handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
-  };
-  
-  const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
+  const handlePlayGame = () => {
+    if (user !== undefined && isAuthenticated){
+      console.log('redirect to game screen')
+        navigate('/game');
+    }
+    else{
+      console.log('redirect to login screen')
+      loginWithRedirect()
+    }
   };
 
-  const enterGameRoom = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
 
-    alert([usernameValue, passwordValue])
-    // navigate('/game',{state:{
-    //   name:{nameValue},
-    //   room:{roomValue} 
-    // }});
-  };
 
   return (
-    <div className="bg">
-      <div className="form-bg">
-         <h2 className="form-heading">Full Stack Web Developement Trivia</h2>
-        <Form onSubmit={enterGameRoom}>
-          <Container className="mb-2 mt-4">
-            <Row>
-              <Col sm={12}>
-                <Form.Group className="" controlId="formBasicName">
-                  <Form.Control
-                    type="text"
-                    placeholder="username"
-                    value={usernameValue}
-                    onChange={handleUsername}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-            
-            <Row>
-              <Col sm={12}>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicName">
-                  <Form.Control
-                    type="password"
-                    placeholder="password"
-                    value={passwordValue}
-                    onChange={handlePassword}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-
-          </Container>
-          <Form.Group className="" controlId="formBasicPassword">
-            <Button variant="primary" type="submit">
-              LOG IN
-            </Button>
-          </Form.Group>
-        </Form>
-        
-        <Button onClick={() => loginWithRedirect()} variant="primary" type="submit">LOG IN</Button>
-
-        <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} variant="primary" type="submit">LOG OUT</Button>
-
-        {
-                user !== undefined && isAuthenticated && (
-                    <div>
-                        {/* <img src={user.picture} alt={user.name} /> */}
-                        <h2>{user.name}</h2>
-                        <p>{user.email}</p>
-                    </div>
-                )
-            }
+    <Navbar>
+      <div className="bg">
+        <div className="home-bg">
+          <h2 className="home-heading">Full Stack Web Developement Trivia</h2>
+          <Button variant="primary" id="start-game" onClick={handlePlayGame}>LET'S PLAY</Button>
 
 
+        </div>
       </div>
-    </div>
+    </Navbar>
   );
 }
 

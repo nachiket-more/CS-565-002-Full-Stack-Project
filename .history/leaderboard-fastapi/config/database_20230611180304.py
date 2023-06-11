@@ -18,7 +18,6 @@ db = client.triviagame_app
 collection_name = db["leaderboard"]
 
 def seed_collection():
-    collection_name.delete_many({})
     data = [
         {"username": "user-test@gmail.com", "correct_answers": 4, "date": ""},
         {"username": "email@email.com", "correct_answers": 5, "date": ""}

@@ -2,7 +2,7 @@ from pymongo.mongo_client import MongoClient
 
 # uri = "mongodb+srv://user-nachiket:Jv75Nrir7d7yT7lG@cluster0.gclgp9o.mongodb.net/?retryWrites=true&w=majority"
 
-uri = "mongodb://database:27017/triviagame_app"
+urli = "mongodb://database:27017/triviagame_app"
 
 # Create a new client and connect to the server
 client = MongoClient(uri)
@@ -16,15 +16,3 @@ except Exception as e:
 
 db = client.triviagame_app
 collection_name = db["leaderboard"]
-
-def seed_collection():
-    collection_name.delete_many({})
-    data = [
-        {"username": "user-test@gmail.com", "correct_answers": 4, "date": ""},
-        {"username": "email@email.com", "correct_answers": 5, "date": ""}
-    ]
-    
-    for document in data:
-        collection_name.insert_one(document)
-
-seed_collection()

@@ -18,13 +18,13 @@ db = client.triviagame_app
 collection_name = db["leaderboard"]
 
 def seed_collection():
-    collection_name.delete_many({})
     data = [
-        {"username": "user-test@gmail.com", "correct_answers": 4, "date": ""},
-        {"username": "email@email.com", "correct_answers": 5, "date": ""}
+        {"user-test@gmail.com": "John", "correct_answers": 4, "date": ""},
+        {"email@email.com": "Jane", "correct_answers": 5, "date": ""}
     ]
     
     for document in data:
         collection_name.insert_one(document)
 
+# Call the seeder function to seed the collection
 seed_collection()

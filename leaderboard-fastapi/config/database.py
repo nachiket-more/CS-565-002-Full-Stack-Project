@@ -1,7 +1,5 @@
 from pymongo.mongo_client import MongoClient
 
-# uri = "mongodb+srv://user-nachiket:Jv75Nrir7d7yT7lG@cluster0.gclgp9o.mongodb.net/?retryWrites=true&w=majority"
-
 uri = "mongodb://database:27017/triviagame_app"
 
 # Create a new client and connect to the server

@@ -58,12 +58,12 @@ function QuizComponent() {
           date: new Date().toISOString().slice(0, 10),
         }),
       })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     }
   };
 

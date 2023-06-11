@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Table } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from "../Navbar/Navbar";
 
@@ -23,8 +22,8 @@ function Leaderboard() {
     fetch("http://0.0.0.0:8000/")
       .then((response) => response.json())
       .then((data) => {
-        let sortedScores = data.data.sort(function(a:any,b:any) {
-            return b.correct_answers - a.correct_answers
+        let sortedScores = data.data.sort(function (a: any, b: any) {
+          return b.correct_answers - a.correct_answers;
         });
         setScores(sortedScores);
       })
